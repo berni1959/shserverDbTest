@@ -1,0 +1,16 @@
+﻿# Visual Studio Build-Ordner
+x64/
+x86/
+Debug/
+Release/
+.vs/
+*.user
+*.vcxproj.filters
+
+# Sonstiges
+*.log
+*.tlog
+*.obj
+*.pdb
+*.ilk
+*.exe
