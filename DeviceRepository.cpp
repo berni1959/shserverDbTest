@@ -37,6 +37,20 @@ namespace
         return escaped;
     }
 
+    std::string DeviceRepository::SqlValue(const std::string& value) //macht leerstring wenn feld leer ist
+    {
+        if (value.empty())
+        {
+            return "NULL";
+        }
+        else
+        {
+            return "'" + Escape(value) + "'";
+        }
+	}
+
+
+
     SmartDevice DeviceRepository::MapDeviceRow(MYSQL_ROW row)
     {
         SmartDevice device;
@@ -172,3 +186,137 @@ namespace
         }
         return devices.front();
     }
+
+    int DeviceRepository::InsertDevice(const SmartDevice& device)
+    {
+        std::string sql = "INSERT INTO smart_devices (ga, ga_up, ga_down, ga_stop, ga_position, ga_status, "
+            "name, device_id, device_type, mqtt_topic, http_ip, protocol, category, "
+            "enabled, icon, dpt, unit, room, current_value, last_update, state_bool, alias) VALUES ("
+            + SqlValue(device.ga) + ", "
+            + SqlValue(device.ga_up) + ", "
+            + SqlValue(device.ga_down) + ", "
+            + SqlValue(device.ga_stop) + ", "
+            + SqlValue(device.ga_position) + ", "
+            + SqlValue(device.ga_status) + ", "
+            + SqlValue(device.name) + ", "
+            + SqlValue(device.device_id) + ", "
+            + SqlValue(device.device_type) + ", "
+            + SqlValue(device.mqtt_topic) + ", "
+            + SqlValue(device.http_ip) + ", "
+            + SqlValue(device.protocol) + ", "
+            + SqlValue(device.category) + ", "
+            + (device.enabled ? "1" : "0") + ", "
+            + SqlValue(device.icon) + ", "
+            + SqlValue(device.dpt) + ", "
+            + SqlValue(device.unit) + ", "
+            + SqlValue(device.room) + ", "
+            + SqlValue(device.current_value) + ", "
+            + SqlValue(device.last_update) + ", "
+            + (device.state_bool ? "1" : "0") + ", "
+            + SqlValue(device.alias)
+            + ")";
+        if (mysql_query(m_connection.Raw(), sql.c_str()))
+        {
+            throw DbException(std::string("InsertDevice fehlgeschlagen: ") +
+                mysql_error(m_connection.Raw()));
+        }
+        return static_cast<int>(mysql_insert_id(m_connection.Raw()));
+	}
+    void DeviceRepository::UpdateDevice(const SmartDevice& device)
+    {
+        std::string sql = "UPDATE smart_devices SET "
+            "ga = " + SqlValue(device.ga) + ", "
+            "ga_up = " + SqlValue(device.ga_up) + ", "
+            "ga_down = " + SqlValue(device.ga_down) + ", "
+            "ga_stop = " + SqlValue(device.ga_stop) + ", "
+            "ga_position = " + SqlValue(device.ga_position) + ", "
+            "ga_status = " + SqlValue(device.ga_status) + ", "
+            "name = " + SqlValue(device.name) + ", "
+            "device_id = " + SqlValue(device.device_id) + ", "
+            "device_type = " + SqlValue(device.device_type) + ", "
+            "mqtt_topic = " + SqlValue(device.mqtt_topic) + ", "
+            "http_ip = " + SqlValue(device.http_ip) + ", "
+            "protocol = " + SqlValue(device.protocol) + ", "
+            "category = " + SqlValue(device.category) + ", "
+            "enabled = " + (device.enabled ? "1" : "0") + ", "
+            "icon = " + SqlValue(device.icon) + ", "
+            "dpt = " + SqlValue(device.dpt) + ", "
+            "unit = " + SqlValue(device.unit) + ", "
+            "room = " + SqlValue(device.room) + ", "
+            "current_value = " + SqlValue(device.current_value) + ", "
+            "last_update = " + SqlValue(device.last_update) + ", "
+            "state_bool = " + (device.state_bool ? "1" : "0") + ", "
+            "alias = "+SqlValue(device.alias)+
+            " WHERE id = "+std::to_string(device.id);
+        if (mysql_query(m_connection.Raw(), sql.c_str()))
+        {
+            throw DbException(std::string("UpdateDevice fehlgeschlagen: ") +
+                mysql_error(m_connection.Raw()));
+        }
+	}
+
+
+    void DeviceRepository::UpdateDeviceState(int deviceId, const std::string& currentValue)
+    {
+        std::string sql =
+            "UPDATE smart_devices SET "
+            "current_value = " + SqlValue(currentValue) + ", " +
+            "last_update = NOW() "
+            "WHERE id = " + std::to_string(deviceId);
+
+        if (mysql_query(m_connection.Raw(), sql.c_str()))
+        {
+            throw DbException(std::string("UpdateDeviceState fehlgeschlagen: ") + mysql_error(m_connection.Raw()));
+        }
+    }
+
+    int DeviceRepository::InsertGroupAddress(const DeviceGroupAddress& ga)
+    {
+        std::string sql = "INSERT INTO device_group_addresses (device_id, function_name, ga, dpt, notes) VALUES ("
+            + std::to_string(ga.device_id) + ", "
+            + SqlValue(ga.function_name) + ", "
+            + SqlValue(ga.ga) + ", "
+            + SqlValue(ga.dpt) + ", "
+            + SqlValue(ga.notes) +
+            ")";
+        if (mysql_query(m_connection.Raw(), sql.c_str()))
+        {
+            throw DbException(std::string("InsertGroupAddress fehlgeschlagen: ") +
+                mysql_error(m_connection.Raw()));
+        }
+        return static_cast<int>(mysql_insert_id(m_connection.Raw()));
+	}
+    void DeviceRepository::UpdateGroupAdress(const DeviceGroupAddress& ga)
+    {
+        std::string sql = "UPDATE device_group_addresses SET "
+            "device_id = " + std::to_string(ga.device_id) + ", "
+            "function_name = " + SqlValue(ga.function_name) + ", "
+            "ga = " + SqlValue(ga.ga) + ", "
+            "dpt = " + SqlValue(ga.dpt) + ", "
+            "notes = " + SqlValue(ga.notes) +
+            " WHERE id = " + std::to_string(ga.id);
+        if (mysql_query(m_connection.Raw(), sql.c_str()))
+        {
+            throw DbException(std::string("UpdateGroupAdress fehlgeschlagen: ") +
+                mysql_error(m_connection.Raw()));
+        }
+	}
+    void DeviceRepository::DeleteGroupAddress(int id)
+    {
+        std::string sql = "DELETE FROM device_group_addresses WHERE id = " + std::to_string(id);
+        if (mysql_query(m_connection.Raw(), sql.c_str()))
+        {
+            throw DbException(std::string("DeleteGroupAddress fehlgeschlagen: ") +
+                mysql_error(m_connection.Raw()));
+        }
+	}
+
+ void DeviceRepository::DeleteDevice(int id)
+    {
+        std::string sql = "DELETE FROM smart_devices WHERE id = " + std::to_string(id);
+        if (mysql_query(m_connection.Raw(), sql.c_str()))
+        {
+            throw DbException(std::string("DeleteDevice fehlgeschlagen: ") +
+                mysql_error(m_connection.Raw()));
+        }
+ }
