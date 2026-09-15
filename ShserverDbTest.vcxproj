@@ -23,11 +23,14 @@
     <ClCompile Include="Test_Doorbird.cpp" />
     <ClCompile Include="Test_Dyson.cpp" />
     <ClCompile Include="Test_FritzBox.cpp" />
+    <ClCompile Include="Test_FritzBoxDirect.cpp" />
     <ClCompile Include="Test_Midea.cpp" />
     <ClCompile Include="Test_MideaDirect.cpp" />
+    <ClCompile Include="Test_ScheduleRunner.cpp" />
     <ClCompile Include="Test_Shelly.cpp" />
     <ClCompile Include="Test_Solar.cpp" />
     <ClCompile Include="Test_Solarman.cpp" />
+    <ClCompile Include="Test_SunCalc.cpp" />
     <ClCompile Include="Test_Tuya.cpp" />
     <ClCompile Include="Test_TuyaDirect.cpp" />
     <ClCompile Include="Test_XSense.cpp" />

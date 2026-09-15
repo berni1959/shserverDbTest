@@ -11,3 +11,6 @@ void Test_Dyson();
 void Test_Solarman();
 void Test_TuyaDirect();
 void Test_MideaDirect();
+void Test_FritzBoxDirect();
+void Test_SunCalc();
+void Test_ScheduleRunner();

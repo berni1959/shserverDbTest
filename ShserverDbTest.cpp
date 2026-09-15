@@ -22,6 +22,9 @@ int main()
     std::cout << " 9 - Solarman (nur Auslesen)\n";
     std::cout << "10 - Tuya (direkt, ohne Pi)\n";
     std::cout << "11 - Midea (direkt, ohne Pi)\n";
+    std::cout << "12 - FritzBox (direkt, ohne Pi)\n";
+    std::cout << "13 - SunCalc (Sonnenauf-/-untergang)\n";
+    std::cout << "14 - ScheduleRunner (Zeitschaltuhr testen)\n";
     std::cout << "Auswahl: ";
 
     int choice;
@@ -40,6 +43,9 @@ int main()
     case 9: Test_Solarman(); break;
     case 10: Test_TuyaDirect(); break;
     case 11: Test_MideaDirect(); break;
+    case 12: Test_FritzBoxDirect(); break;
+    case 13: Test_SunCalc(); break;
+    case 14: Test_ScheduleRunner(); break;
     default: std::cout << "Ungueltige Auswahl\n";
     }
 
