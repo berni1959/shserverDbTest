@@ -20,6 +20,20 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ShserverDbTest.cpp" />
+    <ClCompile Include="Test_Doorbird.cpp" />
+    <ClCompile Include="Test_Dyson.cpp" />
+    <ClCompile Include="Test_FritzBox.cpp" />
+    <ClCompile Include="Test_Midea.cpp" />
+    <ClCompile Include="Test_MideaDirect.cpp" />
+    <ClCompile Include="Test_Shelly.cpp" />
+    <ClCompile Include="Test_Solar.cpp" />
+    <ClCompile Include="Test_Solarman.cpp" />
+    <ClCompile Include="Test_Tuya.cpp" />
+    <ClCompile Include="Test_TuyaDirect.cpp" />
+    <ClCompile Include="Test_XSense.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Tests.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
