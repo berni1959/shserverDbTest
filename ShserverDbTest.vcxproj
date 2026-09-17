@@ -19,10 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Main.cpp" />
     <ClCompile Include="ShserverDbTest.cpp" />
     <ClCompile Include="Test_AudioSessionManager.cpp" />
     <ClCompile Include="Test_Doorbird.cpp" />
     <ClCompile Include="Test_Dyson.cpp" />
+    <ClCompile Include="Test_FcmNotifier.cpp" />
     <ClCompile Include="Test_FritzBox.cpp" />
     <ClCompile Include="Test_FritzBoxDirect.cpp" />
     <ClCompile Include="Test_Midea.cpp" />

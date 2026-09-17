@@ -29,6 +29,7 @@ int main()
     std::cout << "16 - TalkManager (Verbindungstest)\n";
     std::cout << "17 - AudioSessionManager (10s Testaufnahme)\n";
     std::cout << "18 - PresenceService (Anwesenheitspruefung)\n";
+    std::cout << "19 - FCM (Test-Push)\n";
     std::cout << "Auswahl: ";
 
     int choice;
@@ -54,6 +55,7 @@ int main()
     case 16: Test_TalkManager(); break;
     case 17: Test_AudioSessionManager(); break;
     case 18: Test_PresenceService(); break;
+    case 19: Test_FcmNotifier(); break;
     default: std::cout << "Ungueltige Auswahl\n";
     }
 
