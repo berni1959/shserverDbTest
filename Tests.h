@@ -17,3 +17,4 @@ void Test_ScheduleRunner();
 void Test_RecordingManager();
 void Test_TalkManager();
 void Test_AudioSessionManager();
+void Test_PresenceService();

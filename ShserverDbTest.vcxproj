@@ -27,6 +27,7 @@
     <ClCompile Include="Test_FritzBoxDirect.cpp" />
     <ClCompile Include="Test_Midea.cpp" />
     <ClCompile Include="Test_MideaDirect.cpp" />
+    <ClCompile Include="Test_PresenceService.cpp" />
     <ClCompile Include="Test_RecordingManager.cpp" />
     <ClCompile Include="Test_ScheduleRunner.cpp" />
     <ClCompile Include="Test_Shelly.cpp" />
