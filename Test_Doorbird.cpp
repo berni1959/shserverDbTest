@@ -10,7 +10,7 @@
 
 void Test_DoorBird()
 {
-    DoorbirdClient doorbird("192.168.0.63", "IhrBenutzername", "IhrPasswort");
+    DoorbirdClient doorbird("192.168.0.63", "ghsjms0008", "Ga1012Be1006");
 
     std::map<std::string, std::string> chatIds = {
         { "Bernd", "44909982" },

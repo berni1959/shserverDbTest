@@ -25,6 +25,9 @@ int main()
     std::cout << "12 - FritzBox (direkt, ohne Pi)\n";
     std::cout << "13 - SunCalc (Sonnenauf-/-untergang)\n";
     std::cout << "14 - ScheduleRunner (Zeitschaltuhr testen)\n";
+    std::cout << "15 - RecordingManager (Testaufnahme)\n";
+    std::cout << "16 - TalkManager (Verbindungstest)\n";
+    std::cout << "17 - AudioSessionManager (10s Testaufnahme)\n";
     std::cout << "Auswahl: ";
 
     int choice;
@@ -46,6 +49,9 @@ int main()
     case 12: Test_FritzBoxDirect(); break;
     case 13: Test_SunCalc(); break;
     case 14: Test_ScheduleRunner(); break;
+    case 15: Test_RecordingManager(); break;
+    case 16: Test_TalkManager(); break;
+    case 17: Test_AudioSessionManager(); break;
     default: std::cout << "Ungueltige Auswahl\n";
     }
 
